@@ -6,6 +6,8 @@ import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageSwitcher;
@@ -45,9 +47,11 @@ public class MainActivity extends AppCompatActivity {
         healthBar.setMax(target.getMaxHealth());
         healthBar.setProgress(target.getCurrentHealth());
 
-        getActionBar().setHomeButtonEnabled(true);
-       // getActionBar().setTitle("Money: ");
-        getActionBar().setIcon(R.mipmap.moneyicon);
+        //getActionBar().setHomeButtonEnabled(true);
+        // getActionBar().setTitle("Money: ");
+        //getActionBar().setIcon(R.mipmap.moneyicon);
+
+        final Animation anim = AnimationUtils.loadAnimation(this, R.anim.scale);
 
         mTarget.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
                 punchSoundMP = MediaPlayer.create(MainActivity.this, R.raw.smack);
                 punchSoundMP.start();
                 target.fight();
+                mTarget.startAnimation(anim);
                 if(target.isDead()) {
                     target.changeCharacters(mTarget);
                     deathIndex++;
