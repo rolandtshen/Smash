@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Smash</string>
+    <string name="title_activity_myupgrades">myupgrades</string>
+    <string name="title_activity_upgrades">Upgrades</string>
+</resources>
