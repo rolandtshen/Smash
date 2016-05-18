@@ -52,7 +52,6 @@ public class Target {
     };
 
     int[] gloves = {
-            R.mipmap.gloves1,
     };
 
     public void changeCharacters(ImageButton current) {
