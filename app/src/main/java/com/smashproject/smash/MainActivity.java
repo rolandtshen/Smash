@@ -23,7 +23,6 @@ public class MainActivity extends AppCompatActivity {
     TextView healthTextView;
     Button upgrades;
     RelativeLayout background;
-    Upgrades mUpgrades = new Upgrades();
     Target target;
     ProgressBar healthBar;
     MediaPlayer punchSoundMP;
@@ -38,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         pointsTextView = (TextView) findViewById(R.id.points);
         mTarget = (ImageButton) findViewById(R.id.target);
         healthTextView = (TextView) findViewById(R.id.health);
-        //upgrades = (Button) findViewById(R.id.viewUpgrades);
+        upgrades = (Button) findViewById(R.id.upgradesButton);
         background = (RelativeLayout) findViewById(R.id.background);
         healthBar = (ProgressBar) findViewById(R.id.healthBar);
         target = new Target(mTarget, background);
@@ -46,10 +45,6 @@ public class MainActivity extends AppCompatActivity {
 
         healthBar.setMax(target.getMaxHealth());
         healthBar.setProgress(target.getCurrentHealth());
-
-        //getActionBar().setHomeButtonEnabled(true);
-        // getActionBar().setTitle("Money: ");
-        //getActionBar().setIcon(R.mipmap.moneyicon);
 
         final Animation anim = AnimationUtils.loadAnimation(this, R.anim.scale);
 
@@ -77,11 +72,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        /*upgrades.setOnClickListener(new View.OnClickListener() {
+        upgrades.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 viewUpgrades();
             }
-        });*/
+        });
     }
     private void viewUpgrades() {
         Intent intent = new Intent(this, Upgrades.class);

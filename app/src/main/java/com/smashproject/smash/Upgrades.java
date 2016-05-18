@@ -1,31 +1,22 @@
 package com.smashproject.smash;
-
-import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.widget.Adapter;
-import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
-import android.widget.ListView;
-import android.widget.TextView;
 import java.util.ArrayList;
 
-public class Upgrades extends AppCompatActivity {
-    private String[] upgrades = new String[] { "GLOVE OF BOOM", "HAPPY FEET 2"};
+public class Upgrades {
+    public String name;
+    public String hometown;
 
-    ListAdapter gloveAdapter;
-    ListAdapter helperAdapter;
-    ListView gloveList;
-    ListView helperList;
+    public Upgrades(String name, String hometown) {
+        this.name = name;
+        this.hometown = hometown;
+    }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_upgrades);
-        gloveList = (ListView) findViewById(R.id.gloveUpgrades);
-        //helperList = (ListView) findViewById(R.id.helperUpgrades);
-        gloveAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, upgrades);
-        gloveList.setAdapter(gloveAdapter);
-        helperList.setAdapter(gloveAdapter);
+    public static ArrayList<Upgrades> getUsers() {
+        ArrayList<Upgrades> upgrades = new ArrayList<Upgrades>();
+        upgrades.add(new Upgrades("Harry", "San Diego"));
+        upgrades.add(new Upgrades("Marla", "San Francisco"));
+        upgrades.add(new Upgrades("Sarah", "San Marco"));
+        return upgrades;
     }
 }
+
+
