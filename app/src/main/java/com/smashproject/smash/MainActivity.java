@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         //upgrades = (Button) findViewById(R.id.viewUpgrades);
         background = (RelativeLayout) findViewById(R.id.background);
         healthBar = (ProgressBar) findViewById(R.id.healthBar);
-        target = new Target(mTarget, background);
+        target = new Target(this, mTarget, background);
         upgrades = (Button) findViewById(R.id.upgradesButton);
 
 
