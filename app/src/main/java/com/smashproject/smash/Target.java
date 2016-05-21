@@ -1,6 +1,10 @@
 package com.smashproject.smash;
 
 import android.content.Context;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -19,9 +23,9 @@ public class Target {
     public int numPoints = 0;
     public int damage = 1;
 
-    public Target(ImageButton mTarget, RelativeLayout background) {
+    public Target(Context c, ImageButton mTarget, RelativeLayout background) {
         mTarget.setImageResource(R.mipmap.charboxer);
-        background.setBackgroundResource(R.mipmap.bg10);
+        background.setBackgroundDrawable(new BitmapDrawable(decodeSampledBitmapFromResource(c.getResources(), R.mipmap.bg10, 2304, 4096)));
     }
 
     int[] characters = {
@@ -67,9 +71,6 @@ public class Target {
     }
 
 
-    public void animate(ImageButton current){
-
-    }
 
     public void stopPlaying(MediaPlayer punchSoundMP) {
         if (punchSoundMP != null) {
@@ -107,5 +108,41 @@ public class Target {
         maxHealth += 1;
         currentHealth = maxHealth;
     }
+    public static int calculateInSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight) {
+        // Raw height and width of image
+        final int height = options.outHeight;
+        final int width = options.outWidth;
+        int inSampleSize = 1;
 
+        if (height > reqHeight || width > reqWidth) {
+
+            final int halfHeight = height / 2;
+            final int halfWidth = width / 2;
+
+            // Calculate the largest inSampleSize value that is a power of 2 and keeps both
+            // height and width larger than the requested height and width.
+            while ((halfHeight / inSampleSize) > reqHeight
+                    && (halfWidth / inSampleSize) > reqWidth) {
+                inSampleSize *= 2;
+            }
+        }
+
+        return inSampleSize;
+    }
+
+    public static Bitmap decodeSampledBitmapFromResource(Resources res, int resId,
+                                                         int reqWidth, int reqHeight) {
+
+        // First decode with inJustDecodeBounds=true to check dimensions
+        final BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = true;
+        BitmapFactory.decodeResource(res, resId, options);
+
+        // Calculate inSampleSize
+        options.inSampleSize = calculateInSampleSize(options, reqWidth, reqHeight);
+
+        // Decode bitmap with inSampleSize set
+        options.inJustDecodeBounds = false;
+        return BitmapFactory.decodeResource(res, resId, options);
+    }
 }
