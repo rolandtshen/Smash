@@ -1,4 +1,4 @@
-package com.smashproject.smash;
+/*package com.smashproject.smash;
 
 import java.util.ArrayList;
 
@@ -24,5 +24,5 @@ public class UpgradesActivity extends Activity {
         ListView listView = (ListView) findViewById(R.id.list);
         listView.setAdapter(adapter);
     }
-
 }
+*/

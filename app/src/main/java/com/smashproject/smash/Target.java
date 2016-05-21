@@ -7,13 +7,12 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
-import android.os.Bundle;
-import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import java.util.Random;
+import java.util.zip.CheckedOutputStream;
 
 public class Target {
 
@@ -23,9 +22,9 @@ public class Target {
     public int numPoints = 0;
     public int damage = 1;
 
-    public Target(Context c, ImageButton mTarget, RelativeLayout background) {
-        mTarget.setImageResource(R.mipmap.charboxer);
-        background.setBackgroundDrawable(new BitmapDrawable(decodeSampledBitmapFromResource(c.getResources(), R.mipmap.bg10, 2304, 4096)));
+    public Target(Context c, ImageButton mTarget, ImageView background) {
+        mTarget.setImageBitmap(decodeSampledBitmapFromResource(c.getResources(), R.mipmap.charboxer, 1100, 1100));
+        background.setImageBitmap(decodeSampledBitmapFromResource(c.getResources(), R.mipmap.bg10, 1000, 1000));
     }
 
     int[] characters = {
@@ -55,19 +54,16 @@ public class Target {
             R.mipmap.bg10,
     };
 
-    int[] gloves = {
-    };
-
-    public void changeCharacters(ImageButton current) {
+    public void changeCharacters(ImageButton current, Context c) {
         Random rand = new Random();
         int random = rand.nextInt(characters.length);
-        current.setImageResource(characters[random]);
+        current.setImageBitmap(decodeSampledBitmapFromResource(c.getResources(), characters[random], 1100, 1100));
     }
 
-    public void changeBackgrounds(RelativeLayout background) {
+    public void changeBackgrounds(ImageView background, Context c) {
         Random rand = new Random();
         int random = rand.nextInt(backgrounds.length);
-        background.setBackgroundResource(backgrounds[random]);
+        background.setImageBitmap(decodeSampledBitmapFromResource(c.getResources(), backgrounds[random], 1000, 1000));
     }
 
 
@@ -108,6 +104,7 @@ public class Target {
         maxHealth += 1;
         currentHealth = maxHealth;
     }
+
     public static int calculateInSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight) {
         // Raw height and width of image
         final int height = options.outHeight;
@@ -130,8 +127,7 @@ public class Target {
         return inSampleSize;
     }
 
-    public static Bitmap decodeSampledBitmapFromResource(Resources res, int resId,
-                                                         int reqWidth, int reqHeight) {
+    public static Bitmap decodeSampledBitmapFromResource(Resources res, int resId, int reqWidth, int reqHeight) {
 
         // First decode with inJustDecodeBounds=true to check dimensions
         final BitmapFactory.Options options = new BitmapFactory.Options();

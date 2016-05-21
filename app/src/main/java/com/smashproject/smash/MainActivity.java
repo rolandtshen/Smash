@@ -1,5 +1,6 @@
 package com.smashproject.smash;
 
+import android.content.Context;
 import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,22 +9,26 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 
 public class MainActivity extends AppCompatActivity {
     //all variables
     TextView pointsTextView;
     ImageButton mTarget;
-    Button upgrades;
-    RelativeLayout background;
+    TextView upgradesLabel;
+    ImageView background;
     Target target;
     ProgressBar healthBar;
     MediaPlayer punchSoundMP;
     int deathIndex;
     int newIndex;
+    Context c;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,11 +40,11 @@ public class MainActivity extends AppCompatActivity {
         pointsTextView = (TextView) findViewById(R.id.money);
         mTarget = (ImageButton) findViewById(R.id.target);
         //upgrades = (Button) findViewById(R.id.viewUpgrades);
-        background = (RelativeLayout) findViewById(R.id.background);
+        background = (ImageView) findViewById(R.id.bg);
         healthBar = (ProgressBar) findViewById(R.id.healthBar);
         target = new Target(this, mTarget, background);
-        upgrades = (Button) findViewById(R.id.upgradesButton);
-
+        upgradesLabel = (TextView) findViewById(R.id.upgrades);
+        c = this;
 
         healthBar.setMax(target.getMaxHealth());
         healthBar.setProgress(target.getCurrentHealth());
@@ -49,20 +54,18 @@ public class MainActivity extends AppCompatActivity {
         mTarget.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 target.stopPlaying(punchSoundMP);
                 punchSoundMP = MediaPlayer.create(MainActivity.this, R.raw.smack);
                 punchSoundMP.start();
                 mTarget.startAnimation(anim);
                 target.fight();
 
-                if(target.isDead()) {
+                if (target.isDead()) {
                     deathIndex++;
-                }
-                else {
-                    if(deathIndex != newIndex) {
-                        target.changeCharacters(mTarget);
-                        target.changeBackgrounds(background);
+                } else {
+                    if (deathIndex != newIndex) {
+                        target.changeCharacters(mTarget, c);
+                        target.changeBackgrounds(background, c);
                         target.numPoints++;
                         newIndex++;
                     }
@@ -72,6 +75,11 @@ public class MainActivity extends AppCompatActivity {
                 healthBar.setProgress(target.getCurrentHealth());
 
                 pointsTextView.setText(target.numPoints + "");
+            }
+        });
+        upgradesLabel.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v){
+
             }
         });
     }
