@@ -1,4 +1,4 @@
-package com.smashproject.smash;
+/*package com.smashproject.smash;
 
 import java.util.ArrayList;
     import android.content.Context;
@@ -74,3 +74,4 @@ public class UpgradesAdapter extends ArrayAdapter<Upgrades> {
         return BitmapFactory.decodeResource(res, resId, options);
     }
 }
+*/
