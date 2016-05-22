@@ -24,7 +24,8 @@ public class Target {
 
     public Target(Context c, ImageButton mTarget, ImageView background) {
         mTarget.setImageBitmap(decodeSampledBitmapFromResource(c.getResources(), R.mipmap.charboxer, 1100, 1100));
-        background.setImageBitmap(decodeSampledBitmapFromResource(c.getResources(), R.mipmap.bg10, 1000, 1000));
+        //background.setImageBitmap(decodeSampledBitmapFromResource(c.getResources(), R.mipmap.bg10, 1000, 1000));
+        background.setBackgroundResource(R.mipmap.bg10);
     }
 
     int[] characters = {
@@ -63,7 +64,10 @@ public class Target {
     public void changeBackgrounds(ImageView background, Context c) {
         Random rand = new Random();
         int random = rand.nextInt(backgrounds.length);
-        background.setImageBitmap(decodeSampledBitmapFromResource(c.getResources(), backgrounds[random], 1000, 1000));
+        //Bitmap bg = ((BitmapDrawable) background).getBitmap();
+        //BitmapDrawable bg = new BitmapDrawable(c.getResources(),decodeSampledBitmapFromResource(c.getResources(), backgrounds[random], 1000, 1000));
+        //background.setImageDrawable(bg);
+        background.setBackgroundResource(backgrounds[random]);
     }
 
     public void stopPlaying(MediaPlayer punchSoundMP) {
@@ -75,7 +79,7 @@ public class Target {
     }
 
     public boolean isDead() {
-        if(currentHealth <= 0) {
+        if(currentHealth <= UpgradesActivity.getDamage()) {
             return true;
         }
         return false;
@@ -94,13 +98,17 @@ public class Target {
             respawn();
         }
         else {
-            numPoints++;
+            numPoints += 1;
             currentHealth = currentHealth - UpgradesActivity.getDamage();
         }
     }
     public void respawn() {
-        maxHealth *= 1.5;
+        maxHealth *= 1.8;
         currentHealth = maxHealth;
+    }
+
+    public static int getNumPoints(){
+        return numPoints;
     }
 
     public static void payMoney(int money){

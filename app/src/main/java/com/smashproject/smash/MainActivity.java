@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     Target target;
     ProgressBar healthBar;
     MediaPlayer punchSoundMP;
+    Button quitGame;
     int deathIndex;
     int newIndex;
     Context c;
@@ -45,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
         healthBar = (ProgressBar) findViewById(R.id.healthBar);
         target = new Target(this, mTarget, background);
         upgradesLabel = (TextView) findViewById(R.id.upgrades);
+        quitGame = (Button) findViewById(R.id.quit);
         c = this;
 
         healthBar.setMax(target.getMaxHealth());
@@ -67,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
                     if (deathIndex != newIndex) {
                         target.changeCharacters(mTarget, c);
                         target.changeBackgrounds(background, c);
-                        target.numPoints++;
+                        target.numPoints += 15;
                         newIndex++;
                     }
                 }
@@ -83,6 +85,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v){
                 viewUpgrades();
+                pointsTextView.setText(target.numPoints + "");
+            }
+        });
+
+        quitGame.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                setQuitGame();
+                target.numPoints = 0;
             }
         });
 
@@ -90,6 +101,11 @@ public class MainActivity extends AppCompatActivity {
 
     private void viewUpgrades(){
         Intent intent = new Intent(this, UpgradesActivity.class);
+        startActivity(intent);
+    }
+
+    private void setQuitGame(){
+        Intent intent = new Intent(this, MainMenu.class);
         startActivity(intent);
     }
 

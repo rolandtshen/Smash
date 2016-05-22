@@ -32,56 +32,71 @@ public class UpgradesActivity extends Activity {
                         Target.payMoney(0);
                         break;
                     case 1:
-                        if(Target.numPoints >= 5) {
+                        if(Target.getNumPoints() >= 5) {
                             damage = 2;
                             Target.payMoney(5);
                             break;
                         }
+                        else
+                        break;
                     case 2:
-                        if(Target.numPoints >= 10) {
-                            damage = 3;
-                            Target.payMoney(10);
-                            break;
-                        }
-                    case 3:
-                        if(Target.numPoints >= 15) {
-                            damage = 4;
+                        if(Target.getNumPoints() >= 15) {
+                            damage = 5;
                             Target.payMoney(15);
                             break;
                         }
-                    case 4:
-                        if(Target.numPoints >= 20) {
-                            damage = 5;
-                            Target.payMoney(20);
-                            break;
-                        }
-                    case 5:
-                        if(Target.numPoints >= 25) {
-                            damage = 6;
-                            Target.payMoney(25);
-                            break;
-                        }
-                    case 6:
-                        if(Target.numPoints >= 30) {
-                            damage = 7;
-                            Target.payMoney(30);
-                            break;
-                        }
-                    case 7:
-                        if(Target.numPoints >= 35) {
+                        else
+                        break;
+                    case 3:
+                        if(Target.getNumPoints() >= 40) {
                             damage = 8;
-                            Target.payMoney(35);
-                            break;
-                        }
-                    case 8:
-                        if(Target.numPoints >= 10) {
-                            damage = 9;
                             Target.payMoney(40);
                             break;
                         }
+                        else
+                        break;
+                    case 4:
+                        if(Target.getNumPoints() >= 90) {
+                            damage = 12;
+                            Target.payMoney(90);
+                            break;
+                        }
+                        else
+                        break;
+                    case 5:
+                        if(Target.getNumPoints() >= 150) {
+                            damage = 18;
+                            Target.payMoney(150);
+                            break;
+                        }
+                        else
+                        break;
+                    case 6:
+                        if(Target.getNumPoints() >= 200) {
+                            damage = 24;
+                            Target.payMoney(200);
+                            break;
+                        }
+                        else
+                        break;
+                    case 7:
+                        if(Target.getNumPoints() >= 260) {
+                            damage = 32;
+                            Target.payMoney(260);
+                            break;
+                        }
+                        else
+                        break;
+                    case 8:
+                        if(Target.getNumPoints() >= 400) {
+                            damage = 40;
+                            Target.payMoney(400);
+                            break;
+                        }
+                        else
+                        break;
                 }
                 finish();
-                //pointsTextView.setText(Target.numPoints);
             }
         });
     }

@@ -24,7 +24,7 @@
         android:layout_alignBaseline="@+id/upgradeName"
         android:layout_toRightOf="@+id/upgradeName"
         android:paddingRight="6dp"
-        android:text="amount: " />
+        android:text="cost: " />
 
     <TextView
         android:id="@+id/amount"
