@@ -8,19 +8,15 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 
 public class MainActivity extends AppCompatActivity {
     //all variables
-    TextView pointsTextView;
+    public TextView moneyTextView;
     ImageButton mTarget;
     TextView upgradesLabel;
     ImageView background;
@@ -33,14 +29,13 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        super.onCreate(savedInstanceState);setContentView(R.layout.activity_main);
+
         //initialize variables
         deathIndex = 1;
         newIndex = deathIndex;
-        pointsTextView = (TextView) findViewById(R.id.money);
+        moneyTextView = (TextView) findViewById(R.id.money);
         mTarget = (ImageButton) findViewById(R.id.target);
-        //upgrades = (Button) findViewById(R.id.viewUpgrades);
         background = (ImageView) findViewById(R.id.bg);
         healthBar = (ProgressBar) findViewById(R.id.healthBar);
         target = new Target(this, mTarget, background);
@@ -49,7 +44,9 @@ public class MainActivity extends AppCompatActivity {
 
         healthBar.setMax(target.getMaxHealth());
         healthBar.setProgress(target.getCurrentHealth());
+        background.setScaleType(ImageView.ScaleType.FIT_XY);
 
+        //causes target to bounce up and down when hit
         final Animation anim = AnimationUtils.loadAnimation(this, R.anim.scale);
 
         mTarget.setOnClickListener(new View.OnClickListener() {
@@ -67,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
                     if (deathIndex != newIndex) {
                         target.changeCharacters(mTarget, c);
                         target.changeBackgrounds(background, c);
-                        target.numPoints++;
+                        target.addMoney(1);
                         newIndex++;
                     }
                 }
@@ -75,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
                 healthBar.setMax(target.getMaxHealth());
                 healthBar.setProgress(target.getCurrentHealth());
 
-                pointsTextView.setText(target.numPoints + "");
+                changeMoneyLabel(target.getNumMoney() + "");
             }
         });
 
@@ -93,4 +90,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void changeMoneyLabel(String s) {
+        moneyTextView.setText(s);
+    }
 }

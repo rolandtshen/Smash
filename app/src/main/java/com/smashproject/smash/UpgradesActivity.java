@@ -3,85 +3,112 @@ package com.smashproject.smash;
 import java.util.ArrayList;
 
 import android.app.Activity;
-import android.content.Intent;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.TextView;
+import android.widget.Toast;
 
 public class UpgradesActivity extends Activity {
 
     ArrayList<Upgrades> arrayOfUsers;
     ListView listView;
-    TextView pointsTextView;
     static int damage = 1;
+    MainActivity main = new MainActivity();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_custom_list);
-        pointsTextView = (TextView) findViewById(R.id.money);
         populateUsersList();
+
+        Context context = getApplicationContext();
+        CharSequence text = "You don't have enough money.";
+        int duration = Toast.LENGTH_SHORT;
+
+        final Toast noMoney = Toast.makeText(context, text, duration);
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 switch (position) {
                     case 0:
-                        damage = 1;
-                        Target.payMoney(0);
+                        if(Target.getNumMoney() >= 5) {
+                            damage += 1;
+                            Target.payMoney(5);
+                        }
+                        else
+                            noMoney.show();
                         break;
                     case 1:
-                        if(Target.numPoints >= 5) {
-                            damage = 2;
-                            Target.payMoney(5);
-                            break;
-                        }
-                    case 2:
-                        if(Target.numPoints >= 10) {
-                            damage = 3;
+                        if(Target.getNumMoney() >= 10) {
+                            damage += 2;
                             Target.payMoney(10);
-                            break;
                         }
-                    case 3:
-                        if(Target.numPoints >= 15) {
-                            damage = 4;
+                        else
+                            noMoney.show();
+                        break;
+
+                    case 2:
+                        if(Target.getNumMoney() >= 15) {
+                            damage += 3;
                             Target.payMoney(15);
-                            break;
                         }
-                    case 4:
-                        if(Target.numPoints >= 20) {
-                            damage = 5;
+                        else
+                            noMoney.show();
+                        break;
+                    case 3:
+                        if(Target.getNumMoney() >= 20) {
+                            damage += 4;
                             Target.payMoney(20);
-                            break;
                         }
-                    case 5:
-                        if(Target.numPoints >= 25) {
-                            damage = 6;
+                        else
+                            noMoney.show();
+                        break;
+                    case 4:
+                        if(Target.getNumMoney() >= 25) {
+                            damage += 5;
                             Target.payMoney(25);
-                            break;
                         }
-                    case 6:
-                        if(Target.numPoints >= 30) {
-                            damage = 7;
+                        else
+                            noMoney.show();
+                        break;
+                    case 5:
+                        if(Target.getNumMoney() >= 30) {
+                            damage += 6;
                             Target.payMoney(30);
-                            break;
                         }
-                    case 7:
-                        if(Target.numPoints >= 35) {
-                            damage = 8;
+                        else
+                            noMoney.show();
+                        break;
+                    case 6:
+                        if(Target.getNumMoney() >= 35) {
+                            damage += 7;
                             Target.payMoney(35);
-                            break;
                         }
-                    case 8:
-                        if(Target.numPoints >= 10) {
-                            damage = 9;
+                        else
+                            noMoney.show();
+                        break;
+                    case 7:
+                        if(Target.getNumMoney() >= 40) {
+                            damage += 8;
                             Target.payMoney(40);
-                            break;
                         }
+                        else
+                            noMoney.show();
+                        break;
+                    case 8:
+                        if(Target.getNumMoney() >= 45) {
+                            damage += 9;
+                            Target.payMoney(45);
+                        }
+                        else
+                            noMoney.show();
+                        break;
                 }
-                finish();
-                //pointsTextView.setText(Target.numPoints);
+                //main.changeMoneyLabel(Target.getNumMoney() + "");
+                //finish();
             }
         });
     }

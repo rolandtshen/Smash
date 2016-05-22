@@ -4,23 +4,18 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 
 import java.util.Random;
-import java.util.zip.CheckedOutputStream;
 
 public class Target {
 
     //init variables
     private int maxHealth = 5;
     private int currentHealth = maxHealth;
-    public static int numPoints = 0;
-    //public int damage = 1;
+    private static int numMoney = 0;
 
     public Target(Context c, ImageButton mTarget, ImageView background) {
         mTarget.setImageBitmap(decodeSampledBitmapFromResource(c.getResources(), R.mipmap.charboxer, 1100, 1100));
@@ -94,17 +89,24 @@ public class Target {
             respawn();
         }
         else {
-            numPoints++;
+            numMoney++;
             currentHealth = currentHealth - UpgradesActivity.getDamage();
         }
     }
     public void respawn() {
-        maxHealth *= 1.5;
+        maxHealth *= 2;
         currentHealth = maxHealth;
     }
 
     public static void payMoney(int money){
-        numPoints -= money;
+        numMoney -= money;
+    }
+
+    public static int getNumMoney() {
+        return numMoney;
+    }
+    public void addMoney(int num) {
+        numMoney += num;
     }
 
     public static int calculateInSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight) {
