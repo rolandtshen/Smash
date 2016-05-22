@@ -1,31 +1,32 @@
 package com.smashproject.smash;
 
-import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.widget.Adapter;
-import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
-import android.widget.ListView;
-import android.widget.TextView;
 import java.util.ArrayList;
 
-public class Upgrades extends AppCompatActivity {
-    private String[] upgrades = new String[] { "GLOVE OF BOOM", "HAPPY FEET 2"};
+public class Upgrades {
+    public String upgradeName;
+    public String amount;
+    public int icon;
 
-    ListAdapter gloveAdapter;
-    ListAdapter helperAdapter;
-    ListView gloveList;
-    ListView helperList;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_upgrades);
-        gloveList = (ListView) findViewById(R.id.gloveUpgrades);
-        //helperList = (ListView) findViewById(R.id.helperUpgrades);
-        gloveAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, upgrades);
-        gloveList.setAdapter(gloveAdapter);
-        helperList.setAdapter(gloveAdapter);
+    public Upgrades(String name, String num, int iconId) {
+        this.upgradeName = name;
+        this.amount = num;
+        this.icon = iconId;
     }
+
+    public static ArrayList<Upgrades> getUsers() {
+        ArrayList<Upgrades> upgrades = new ArrayList<Upgrades>();
+        upgrades.add(new Upgrades("Normal", "0", R.mipmap.glovenorm));
+        upgrades.add(new Upgrades("Air", "0", R.mipmap.gloveair));
+        upgrades.add(new Upgrades("Atom", "0", R.mipmap.gloveatom));
+        upgrades.add(new Upgrades("Fire", "0", R.mipmap.glovefire));
+        upgrades.add(new Upgrades("Ice", "0", R.mipmap.gloveice));
+        upgrades.add(new Upgrades("Magic", "0", R.mipmap.glovemagic));
+        upgrades.add(new Upgrades("Psy", "0", R.mipmap.glovepsy));
+        upgrades.add(new Upgrades("Steel", "0", R.mipmap.glovesteel));
+        upgrades.add(new Upgrades("Wave", "0", R.mipmap.glovewave));
+        return upgrades;
+    }
+
 }
+
+
