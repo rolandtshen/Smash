@@ -19,8 +19,8 @@ public class Target {
     //init variables
     private int maxHealth = 5;
     private int currentHealth = maxHealth;
-    public int numPoints = 0;
-    public int damage = 1;
+    public static int numPoints = 0;
+    //public int damage = 1;
 
     public Target(Context c, ImageButton mTarget, ImageView background) {
         mTarget.setImageBitmap(decodeSampledBitmapFromResource(c.getResources(), R.mipmap.charboxer, 1100, 1100));
@@ -66,8 +66,6 @@ public class Target {
         background.setImageBitmap(decodeSampledBitmapFromResource(c.getResources(), backgrounds[random], 1000, 1000));
     }
 
-
-
     public void stopPlaying(MediaPlayer punchSoundMP) {
         if (punchSoundMP != null) {
             punchSoundMP.stop();
@@ -77,7 +75,7 @@ public class Target {
     }
 
     public boolean isDead() {
-        if(currentHealth == 0) {
+        if(currentHealth <= 0) {
             return true;
         }
         return false;
@@ -97,12 +95,16 @@ public class Target {
         }
         else {
             numPoints++;
-            currentHealth = currentHealth - damage;
+            currentHealth = currentHealth - UpgradesActivity.getDamage();
         }
     }
     public void respawn() {
-        maxHealth += 1;
+        maxHealth *= 1.5;
         currentHealth = maxHealth;
+    }
+
+    public static void payMoney(int money){
+        numPoints -= money;
     }
 
     public static int calculateInSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight) {
