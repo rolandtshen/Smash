@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:weightSum="1"
+              android:background="@mipmap/menubg">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Tap your opponents until they die. Obtain money and buy upgrades for more effective gloves as enemies get stronger."
+        android:id="@+id/textInstructions"
+        android:visibility="invisible"
+        android:layout_weight="0.46"
+        android:paddingRight="20sp"
+        android:paddingLeft="20sp"
+        android:contentDescription="@string/abc_action_bar_home_description"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Play Smash!"
+        android:id="@+id/start"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="30sp"
+        android:layout_marginTop="330sp"
+        android:backgroundTint="#ffffff"
+        android:textStyle="bold"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="How To Play"
+        android:id="@+id/instructions"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="-37sp"
+        android:backgroundTint="#ffffff"
+        android:textStyle="bold"/>
+
+</LinearLayout>
