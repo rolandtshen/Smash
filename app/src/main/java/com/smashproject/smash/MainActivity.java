@@ -1,6 +1,7 @@
 package com.smashproject.smash;
 
 import android.content.Context;
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -77,10 +78,19 @@ public class MainActivity extends AppCompatActivity {
                 pointsTextView.setText(target.numPoints + "");
             }
         });
-        upgradesLabel.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v){
 
+        upgradesLabel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                viewUpgrades();
             }
         });
+
     }
+
+    private void viewUpgrades(){
+        Intent intent = new Intent(this, UpgradesActivity.class);
+        startActivity(intent);
+    }
+
 }
