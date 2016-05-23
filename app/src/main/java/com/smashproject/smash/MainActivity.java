@@ -16,7 +16,8 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
     //all variables
-    public TextView moneyTextView;
+    public static TextView moneyTextView;
+    public TextView killsTextView;
     ImageButton mTarget;
     TextView upgradesLabel;
     ImageView background;
@@ -32,9 +33,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);setContentView(R.layout.activity_main);
 
         //initialize variables
-        deathIndex = 1;
+        deathIndex = 0;
         newIndex = deathIndex;
         moneyTextView = (TextView) findViewById(R.id.money);
+        killsTextView = (TextView) findViewById(R.id.killsNumber);
         mTarget = (ImageButton) findViewById(R.id.target);
         background = (ImageView) findViewById(R.id.bg);
         healthBar = (ProgressBar) findViewById(R.id.healthBar);
@@ -63,8 +65,11 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     if (deathIndex != newIndex) {
                         target.changeCharacters(mTarget, c);
-                        target.changeBackgrounds(background, c);
+                        if(deathIndex % 3 == 0){
+                            target.changeBackgrounds(background, c);
+                        }
                         target.addMoney(1);
+                        killsTextView.setText(deathIndex + "");
                         newIndex++;
                     }
                 }
@@ -73,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
                 healthBar.setProgress(target.getCurrentHealth());
 
                 changeMoneyLabel(target.getNumMoney() + "");
+
             }
         });
 
@@ -90,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void changeMoneyLabel(String s) {
+    public static void changeMoneyLabel(String s) {
         moneyTextView.setText(s);
     }
 }

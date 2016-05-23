@@ -18,7 +18,7 @@ public class Target {
     private static int numMoney = 0;
 
     public Target(Context c, ImageButton mTarget, ImageView background) {
-        mTarget.setImageBitmap(decodeSampledBitmapFromResource(c.getResources(), R.mipmap.charboxer, 1100, 1100));
+        mTarget.setImageBitmap(decodeSampledBitmapFromResource(c.getResources(), R.mipmap.charboxer, 880, 880));
         background.setImageBitmap(decodeSampledBitmapFromResource(c.getResources(), R.mipmap.bg10, 1000, 1000));
     }
 
@@ -52,7 +52,7 @@ public class Target {
     public void changeCharacters(ImageButton current, Context c) {
         Random rand = new Random();
         int random = rand.nextInt(characters.length);
-        current.setImageBitmap(decodeSampledBitmapFromResource(c.getResources(), characters[random], 1100, 1100));
+        current.setImageBitmap(decodeSampledBitmapFromResource(c.getResources(), characters[random], 880, 880));
     }
 
     public void changeBackgrounds(ImageView background, Context c) {
@@ -70,7 +70,7 @@ public class Target {
     }
 
     public boolean isDead() {
-        if(currentHealth <= 0) {
+        if(currentHealth <= UpgradesActivity.getDamage()) {
             return true;
         }
         return false;
@@ -94,7 +94,7 @@ public class Target {
         }
     }
     public void respawn() {
-        maxHealth *= 2;
+        maxHealth *= 1.5;
         currentHealth = maxHealth;
     }
 
@@ -105,6 +105,7 @@ public class Target {
     public static int getNumMoney() {
         return numMoney;
     }
+
     public void addMoney(int num) {
         numMoney += num;
     }

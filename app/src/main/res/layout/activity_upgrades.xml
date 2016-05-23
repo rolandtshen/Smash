@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="60dp"
+    android:layout_height="wrap_content"
     android:padding="10dp"
     >
 
@@ -18,7 +18,7 @@
         android:textSize="30sp" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/costTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/upgradeName"
@@ -31,7 +31,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/upgradeName"
-        android:layout_toRightOf="@+id/textView2"
+        android:layout_toRightOf="@+id/costTextView"
         android:text="test"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textSize="30sp" />
@@ -42,5 +42,25 @@
         android:id="@+id/upgradeIcon"
         android:layout_width="55dp"
         android:layout_height="55dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="level: "
+        android:id="@+id/levelTextView"
+        android:layout_toRightOf="@+id/amount"
+        android:layout_alignTop="@+id/costTextView"
+        android:layout_marginLeft="8sp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="test"
+        android:id="@+id/level"
+        android:textSize="30sp"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/levelTextView"
+        android:layout_toEndOf="@+id/levelTextView"/>
 
 </RelativeLayout>

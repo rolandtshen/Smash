@@ -71,6 +71,43 @@
         android:textSize="28sp"
         android:layout_alignParentTop="true"
         android:layout_above="@+id/bg"
-        android:layout_alignParentEnd="true"/>
+        android:layout_alignParentEnd="true"
+        android:textStyle="bold"/>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:id="@+id/linearLayout2"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Kills: "
+            android:id="@+id/kills"
+            android:layout_alignBottom="@+id/bg"
+            android:layout_alignLeft="@+id/healthBar"
+            android:layout_alignStart="@+id/healthBar"
+            android:textStyle="bold"
+            android:textSize="30sp"
+            android:layout_marginBottom="15sp"
+            android:layout_marginLeft="15sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:id="@+id/killsNumber"
+            android:layout_alignBottom="@+id/bg"
+            android:layout_toRightOf="@+id/kills"
+            android:layout_toEndOf="@+id/kills"
+            android:layout_marginBottom="13sp"
+            android:textSize="30sp"
+            android:textStyle="bold"/>
+    </LinearLayout>
 
 </RelativeLayout>
